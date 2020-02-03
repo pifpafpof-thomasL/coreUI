@@ -229,6 +229,11 @@ export default {
       name: 'Extras',
     },
     {
+      name: 'Todo',
+      url: '/todo',
+      icon: 'icon-list',
+    },
+    {
       name: 'Pages',
       url: '/pages',
       icon: 'icon-star',
