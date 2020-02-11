@@ -229,8 +229,8 @@ export default {
       name: 'Extras',
     },
     {
-      name: 'Todo',
-      url: '/todo',
+      name: 'Goto',
+      url: '/Goto',
       icon: 'icon-list',
     },
     {
