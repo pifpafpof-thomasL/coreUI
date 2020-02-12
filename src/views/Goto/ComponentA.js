@@ -11,7 +11,7 @@ export default function ComponentA() {
 
   return (
     <div>
-      GlobalHook / useStore on ComponentA value = { value }
+      Global Hook! :-) / useStore on ComponentA value = { value }
       <p>
         <input value={value} onChange={changeHandler} />
       </p>

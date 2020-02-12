@@ -2,8 +2,14 @@
 import React, { Component } from "react";
 import {
   Button,
-  Label
+  Label,
+  Container,
+  Col,
+  Row
 } from "reactstrap";
+
+import DayWeather from './DayWeatherHooks'
+
 
 
 export default class GotoList extends Component {
@@ -20,21 +26,29 @@ export default class GotoList extends Component {
       <div>
         {this.props.gotoItems.map(item => (
           <div key={item.id}>
-            <Button
-              style={{ margin: "5px" }}
-              onClick={e => this.deleteRow(item.id, e)}
-            >
-              Delete Element
-            </Button>
-            <Label
-              className="ml-5"
-              onClick={e => this.toggleTerminated(item.id, e)}
-              style={{
-                textDecoration: item.toggleTerminate ? "line-through" : ""
-              }}
-            >
-              {item.text}
-            </Label>
+            <Container>
+              <Row>
+                <Col xs={6}>
+                  <Button
+                    style={{ margin: "5px" }}
+                    onClick={e => this.deleteRow(item.id, e)}
+                  >
+                    Delete Element
+                                </Button>
+                  <Label
+                    className="ml-5"
+                    onClick={e => this.toggleTerminated(item.id, e)}
+                    style={{
+                      textDecoration: item.toggleTerminate ? "line-through" : ""
+                    }}
+                  >
+                    {item.text}
+                  </Label></Col>
+                <Col>
+                  <DayWeather city={item.text} />
+                </Col>
+              </Row>
+            </Container>
           </div>
         ))}
       </div>
@@ -42,4 +56,3 @@ export default class GotoList extends Component {
   }
 }
 
- 

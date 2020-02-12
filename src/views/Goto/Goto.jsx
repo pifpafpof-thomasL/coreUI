@@ -13,8 +13,9 @@ import {
 
 import GotoList from './GotoList'
 import LoadCapitals from './LoadCapitals'
-import DayWeather from './DayWeather'
-//import Counter from './Counter'  // does not work, react dependencies issue
+import DayWeather from './DayWeatherHooks'
+import CountButton from './CountButton'
+
 import ComponentA from './ComponentA'
 import ComponentB from './ComponentB'
 
@@ -40,24 +41,24 @@ export default class GotoApp extends Component {
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
-  renderSelectDropDown() { 
+  renderSelectDropDown() {
     const { selectItems } = this.state;
 
     return (
       <FormGroup>
-      <Label for="exampleSelect">Capitals list</Label>
-      <Input
-        type="select"
-        name="select"
-        id="exampleSelect"
-        onChange={this.handleSelectChange}
-      >
-        <option>Choose a capital...</option>
-        {selectItems.map(item => (
-          <option key={item.id}>{item.text}</option>
-        ))}
-      </Input>
-    </FormGroup>
+        <Label for="exampleSelect">Capitals list</Label>
+        <Input
+          type="select"
+          name="select"
+          id="exampleSelect"
+          onChange={this.handleSelectChange}
+        >
+          <option>Choose a capital...</option>
+          {selectItems.map(item => (
+            <option key={item.id}>{item.text}</option>
+          ))}
+        </Input>
+      </FormGroup>
     )
   }
 
@@ -65,28 +66,28 @@ export default class GotoApp extends Component {
     const { text, selectedItem } = this.state;
     return (
       <div>
-      <form onSubmit={this.handleSubmit}>
-        <Label htmlFor="new-Goto" style={{ margin: "5px" }}>
-          Ou voulez-vous aller ?
+        <form onSubmit={this.handleSubmit}>
+          <Label htmlFor="new-Goto" style={{ margin: "5px" }}>
+            Ou voulez-vous aller ?
         </Label>
-        <input
-          id="new-Goto"
-          className="mx-5"
-          onChange={this.handleChange}
-          value={text}
-        />
-        <Button>Ajouter #{this.state.gotoItems.length + 1}</Button>
-      </form>
-      <Button
-        className="mt-5 mx-auto"
-        style={{ display: "block" }}
-        onClick={() => this.handleClear()}
-      >
-        Vider cette Liste
+          <input
+            id="new-Goto"
+            className="mx-5"
+            onChange={this.handleChange}
+            value={text}
+          />
+          <Button>Ajouter #{this.state.gotoItems.length + 1}</Button>
+        </form>
+        <Button
+          className="mt-5 mx-auto"
+          style={{ display: "block" }}
+          onClick={() => this.handleClear()}
+        >
+          Vider cette Liste
       </Button>
-      {this.renderSelectDropDown()}
-      {selectedItem !== "" && (<DayWeather city={selectedItem}/>) }
-    </div>
+        {this.renderSelectDropDown()}
+        {selectedItem !== "" && (<DayWeather city={selectedItem} />)}
+      </div>
     )
   }
 
@@ -104,10 +105,15 @@ export default class GotoApp extends Component {
               toggleTerminate={this.toggleTerminate}
             />
             {this.renderForms()}
+            <Card className="mt-5">
+              <CardBody>
+                <CountButton />
+              </CardBody>
+            </Card>
             <Card>
               <CardBody>
                 <ComponentA />
-                <ComponentB /> 
+                <ComponentB />
               </CardBody>
             </Card>
           </CardBody>
@@ -127,7 +133,7 @@ export default class GotoApp extends Component {
     this.setState(state => ({
       gotoItems: state.gotoItems.concat([newItem]),
       selectedItem: text
-  }));
+    }));
   }
 
   setCapitals(capitals) {
