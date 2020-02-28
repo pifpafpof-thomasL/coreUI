@@ -8,13 +8,13 @@ import {
   CardBody,
   Button,
   Label,
-  CardDeck
 } from "reactstrap";
 
 import GotoList from './GotoList'
 import LoadCapitals from './LoadCapitals'
 import DayWeather from './DayWeatherHooks'
 import CountButton from './CountButton'
+import AvgTemp from './AvgTemp'
 
 import ComponentA from './ComponentA'
 import ComponentB from './ComponentB'
@@ -105,6 +105,12 @@ export default class GotoApp extends Component {
               toggleTerminate={this.toggleTerminate}
             />
             {this.renderForms()}
+            <Card>
+              <CardBody>
+               <AvgTemp />
+              </CardBody>
+            </Card>
+
             <Card className="mt-5">
               <CardBody>
                 <CountButton />

@@ -1,6 +1,4 @@
 import React from "react";
-
-
 import { useStore } from 'use-store'
  
 export default function ComponentA() {
@@ -8,7 +6,6 @@ export default function ComponentA() {
 
   // traditional event handler no longer needed for inputs
   const changeHandler = (e) => setValue(e.target.value)
-
   return (
     <div>
       Global Hook! :-) / useStore on ComponentA value = { value }

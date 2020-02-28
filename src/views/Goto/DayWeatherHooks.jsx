@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useStore } from 'use-store';
 
 export default function DayWeatherHooks(props) {
+  let [ avgTemp, setAvgTemp ] = useStore('avgTemp')
+  // let avgTemp = 0;
   // Déclare une nouvelle variable d'état, qu’on va appeler « count »
+
   const [fullData, setFullData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [fetchErr, setFetchErr] = useState(false);
@@ -19,15 +23,21 @@ export default function DayWeatherHooks(props) {
       fetch(weatherURL)
       .then(res => res.json())
       .then(data => {
+        const { list } = data
+        //const list = data.list
         setFetchErr(data.cod === '404')
         setLoading(false)
-        setFullData(data.list);
+        setFullData(list);
+        if (list.length) {
+          const newAvgTemp = avgTemp.concat(list[0].main.temp)
+          setAvgTemp(newAvgTemp)
+        }
       });
 
     return function cleanup() { 
       console.log("Cleaning up");
       }
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [city]);
 
   return (

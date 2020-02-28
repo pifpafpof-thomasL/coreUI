@@ -1,6 +1,4 @@
 import React from "react";
-
-
 import { useStore } from 'use-store'
  
 export default function ComponentA() {
